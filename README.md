@@ -31,7 +31,9 @@ To keep all those hundreds of source files from ending up in the same directory 
     ├─ Storyboard
     ├─ LifeCycle
     ├─ Helpers
-    ├─ Scenes
+    ├─ Scenes ├─ View
+              ├─ ViewModel
+              ├─ Model
     
 ## Design Pattern
 I use Model View View-Model (MVVM)design pattern. MVVM is basically a UI Based Design Pattern. The main object of MVVM is to provide a rich UI, testability features, code more reusability and complex data binding. It helps to improve the separation of the business and presentation layers without any direct communication between each other.
