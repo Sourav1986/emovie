@@ -43,18 +43,52 @@ class MovieDetailsViewController: UIViewController {
     var imgBaseUrl = ""
     var posterSizes: [String] = []
     var viewModel: MovieDetailsViewModel!
-    
+    var isConnected = false
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        checkNetwork()
         self.viewModel = MovieDetailsViewModel(delegate: self)
+        if isConnected {
+            mainActivity.startAnimating()
+            viewModel.fetchMovieDetails(movieId: movieId)
+        }
+        else {
+            let title = "Warning"
+            let action = UIAlertAction(title: "OK", style: .default)
+            displayAlert(with: title , message: "Unable to connect network. Please check your network connection", actions: [action])
+        }
         
-        mainActivity.startAnimating()
-        viewModel.fetchMovieDetails(movieId: movieId)
         
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default
+                    .addObserver(self,
+                                 selector: #selector(statusManager),
+                                 name: .flagsChanged,
+                                 object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default
+            .removeObserver(self, name: .flagsChanged, object: nil)
+    }
+    
+    @objc func statusManager(_ notification: Notification) {
+        switch Network.reachability.status {
+                case .unreachable:
+                    isConnected = false
+                case .wwan:
+                    isConnected = true
+                case .wifi:
+                    isConnected = true
+        }
+    }
+    
     // MARK: - Navigation
     @IBAction func clickBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -101,6 +135,17 @@ extension MovieDetailsViewController {
             progressView.trailingAnchor.constraint(equalTo: ratingView.trailingAnchor),
         ]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    func checkNetwork() {
+        switch Network.reachability.status {
+                case .unreachable:
+                    isConnected = false
+                case .wwan:
+                    isConnected = true
+                case .wifi:
+                    isConnected = true
+        }
     }
 }
 // MARK: - Delegate

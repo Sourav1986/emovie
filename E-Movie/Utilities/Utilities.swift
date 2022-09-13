@@ -11,5 +11,5 @@ import Foundation
     Secrets: TMDB api key. Kindly add one before you starts.
 */
 enum Secrets {
-    static let apiKey = "af05eef335f79036c67fa28917794a83" // "TMDB_API_KEY"
+    static let apiKey = "<TMDB_API_KEY>"
 }

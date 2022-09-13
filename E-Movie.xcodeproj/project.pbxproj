@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2152751E28D11F45001AF8E8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152751D28D11F45001AF8E8 /* Reachability.swift */; };
 		21731A6228CDA24300DD9D31 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21731A6128CDA24300DD9D31 /* MovieDetailsViewController.swift */; };
 		2186BC5328CA4E6300AA253D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2186BC5228CA4E6300AA253D /* AppDelegate.swift */; };
 		2186BC5528CA4E6300AA253D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2186BC5428CA4E6300AA253D /* SceneDelegate.swift */; };
@@ -89,6 +90,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2152751D28D11F45001AF8E8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		21731A6128CDA24300DD9D31 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		2186BC4F28CA4E6300AA253D /* E-Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2186BC5228CA4E6300AA253D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				218BF1C928CBD3EF00DC09DA /* Utilities.swift */,
+				2152751D28D11F45001AF8E8 /* Reachability.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				2186BC9A28CA787B00AA253D /* Language.swift in Sources */,
 				218BF1CA28CBD3EF00DC09DA /* Utilities.swift in Sources */,
 				2186BC9E28CA799A00AA253D /* Response.swift in Sources */,
+				2152751E28D11F45001AF8E8 /* Reachability.swift in Sources */,
 				2186BC9028CA733100AA253D /* NetworkServiceError.swift in Sources */,
 				21E50BF028CC8B00005C204C /* SplashProtocol.swift in Sources */,
 				2186BC5728CA4E6300AA253D /* DashboardViewController.swift in Sources */,

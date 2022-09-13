@@ -37,19 +37,56 @@ class DashboardViewController: UIViewController {
     var imgBaseUrl = ""
     var posterSizes: [String] = []
     var viewModel: DashboardViewModel!
+    
+    var isConnected = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkNetwork()
         // Configure UI
         viewModel = DashboardViewModel(delegate: self)
         registerXib()
         viewConfiguration()
         createContextMenu()
         // Calling fetch all the popular movies by default
-        mainActivity.startAnimating()
-        viewModel.fetchMovies(with: viewModel.filter)
+        if isConnected {
+            mainActivity.startAnimating()
+            viewModel.fetchMovies(with: viewModel.filter)
+        }
+        else {
+            let title = "Warning"
+            let action = UIAlertAction(title: "OK", style: .default)
+            displayAlert(with: title , message: "Unable to connect network. Please check your network connection", actions: [action])
+        }
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default
+                    .addObserver(self,
+                                 selector: #selector(statusManager),
+                                 name: .flagsChanged,
+                                 object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default
+            .removeObserver(self, name: .flagsChanged, object: nil)
+    }
+    
+    @objc func statusManager(_ notification: Notification) {
+        switch Network.reachability.status {
+                case .unreachable:
+                    isConnected = false
+                case .wwan:
+                    isConnected = true
+                case .wifi:
+                    isConnected = true
+                }
+    }
 }
 
 extension DashboardViewController {
@@ -86,6 +123,17 @@ extension DashboardViewController {
         let indexPathsForVisibleItems = movieGrid.indexPathsForVisibleItems
         let indexPathsIntersection = Set(indexPathsForVisibleItems).intersection(indexPaths)
         return Array(indexPathsIntersection)
+    }
+    
+    func checkNetwork() {
+        switch Network.reachability.status {
+                case .unreachable:
+                    isConnected = false
+                case .wwan:
+                    isConnected = true
+                case .wifi:
+                    isConnected = true
+        }
     }
 }
 // Configure collectionview
@@ -135,7 +183,7 @@ extension DashboardViewController: UICollectionViewDelegate, Navigation {
 
 extension DashboardViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        if indexPaths.contains(where: isLoadingCell) {
+        if indexPaths.contains(where: isLoadingCell), isConnected == true {
             viewModel.fetchMovies(with: viewModel.filter)
         }
     }
@@ -203,7 +251,7 @@ extension DashboardViewController: UIContextMenuInteractionDelegate {
                                          identifier: nil
                                          ) { [weak self] _ in
             print("Popular Action")
-            if let count = self?.movieGrid?.visibleCells.count, count > 0 {
+            if let count = self?.movieGrid.visibleCells.count, count > 0 ,let connection = self?.isConnected, connection == true {
                 self?.mainActivity.startAnimating()
                 self?.movieGrid?.scrollToItem(at: IndexPath(row: 0, section: 0),
                                                   at: .top,
@@ -217,13 +265,16 @@ extension DashboardViewController: UIContextMenuInteractionDelegate {
         let sortRatingction = UIAction(title: "Rating",
                                        image: nil,
                                        identifier: nil) { [weak self] _ in
+            
             print("Rating Action")
-            self?.mainActivity.startAnimating()
-            self?.movieGrid?.scrollToItem(at: IndexPath(row: 0, section: 0),
-                                              at: .top,
-                                        animated: true)
-            self?.viewModel.reset()
-            self?.viewModel.fetchMovies(with: .rating)
+            if let count = self?.movieGrid.visibleCells.count, count > 0, let connection = self?.isConnected, connection == true {
+                self?.mainActivity.startAnimating()
+                self?.movieGrid?.scrollToItem(at: IndexPath(row: 0, section: 0),
+                                                  at: .top,
+                                            animated: true)
+                self?.viewModel.reset()
+                self?.viewModel.fetchMovies(with: .rating)
+            }
             
         }
 

@@ -127,9 +127,6 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="filter"/>
-                                <connections>
-                                    <action selector="openFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OPr-0G-6x9"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

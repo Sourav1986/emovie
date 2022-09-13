@@ -20,7 +20,7 @@ class SplashViewController: UIViewController {
     
     // View Model
     var viewModel: SplashViewModel!
-    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,7 +28,7 @@ class SplashViewController: UIViewController {
         // UI Configuration - Splash, Image Cache Configuration
         viewConfiguration()
         
-        // Api service - Image Configuration 
+        // Api service - Image Configuration
         activity.startAnimating()
         viewModel.getConfiguration()
     }
