@@ -1,0 +1,27 @@
+{
+  "configurations" : [
+    {
+      "id" : "A48D31E3-EF77-4F76-8302-8F04E4203C94",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "SpashLoadingTests"
+      ],
+      "target" : {
+        "containerPath" : "container:E-Movie.xcodeproj",
+        "identifier" : "2186BC6728CA4E6400AA253D",
+        "name" : "E-MovieTests"
+      }
+    }
+  ],
+  "version" : 1
+}
