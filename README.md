@@ -17,7 +17,17 @@ Shows latest and greatest collection of movies.
 </details>
 
 # Getting Started
-The E Movie displays movie catelog using TMDB api. It's implemented using infinite scrolling technique in UICollectionView. Details screen display movie description.  
+The E Movie displays movie catelog using TMDB api. It's implemented using infinite scrolling technique in UICollectionView. Details screen display movie description. All the images handled by SDWebImage open source library.
+
+Note: To run the project you need add TMDB Api key in Utilities.swift file.
+```swift
+
+enum Secrets {
+    static let apiKey = "Your Api Key"
+}
+
+```
+
 
 ## Tool & Framework
 Xcode(v13.4.1) , Combine, SDWebImage
@@ -40,7 +50,6 @@ I use Model View View-Model (MVVM)design pattern. MVVM is basically a UI Based D
 
 ## Dependency
 I use swift package manager to add dependencies like SDWebImage.
-
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
