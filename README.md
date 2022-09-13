@@ -17,7 +17,7 @@ Shows latest and greatest collection of movies.
 </details>
 
 # Getting Started
-The E Movie displays movie catelog using TMDB api.It's implemented using infinite scrolling technique in UICollectionView. Details screen display movie description.  
+The E Movie displays movie catelog using TMDB api. It's implemented using infinite scrolling technique in UICollectionView. Details screen display movie description.  
 
 ## Tool & Framework
 Xcode(v13.4.1) , Combine, SDWebImage
